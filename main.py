@@ -17,35 +17,57 @@ def divisao(a, b):
     else:
         return "Divisão por zero não é permitida."
 
-
 def pedido_conversor():
-    print("Gostaria de usar o conversor de temperatura? (s/n)")
+    print("Gostaria de usar o conversor de temperatura?")
     resposta = input()
-    if resposta == 's' or resposta == 'S':
+    resposta_validacao(resposta)
+
+def resposta_validacao(resposta):
+    if resposta == 's' or resposta == 'S' or resposta == 'sim' or resposta == 'Sim':
+        print("Iniciando o conversor de temperatura.")
         conversor_temperatura()
-    elif resposta == 'n' or resposta == 'N':
+    elif resposta == 'n' or resposta == 'N' or resposta == 'não' or resposta == 'Não':
         print("Ok. Até mais!")
-        exit
+        exit()
     else:
         print("Resposta inválida. Tente 's' e 'n'.")
         pedido_conversor()
 
-def em_funcionamento(a):
-    print("Você escolheu a operação ", (a), ".")
-    print("Digite os números:")
-    num1 = float(input("Número 1: "))
-    num2 = float(input("Número 2: "))
-    if o == 1:
-        print("Resultado: ", soma(num1, num2))
-    elif o == 2:
-        print("Resultado: ", subtracao(num1, num2))
-    elif o == 3:
-        print("Resultado: ", multiplicacao(num1, num2))
-    elif o == 4:
-        print("Resultado: ", divisao(num1, num2))
+def validar_operacao(operacao) -> int:
+    if operacao == 5 or operacao == '5':
+        print("Saindo da calculadora.")
+        pedido_conversor()
+    elif operacao in [1, 2, 3, 4, '1','2','3','4']:
+        em_funcionamento(operacao)
+    else:
+        error(operacao)
 
+
+
+def em_funcionamento(operacao):
+    print("Você escolheu a operação ", (operacao), ".")
+    print("Digite os números:")
+    num1 = int(input("Número 1: "))
+    num2 = int(input("Número 2: "))
+
+    if (num1) == float or (num2) == float or (num1) == int or (num2) == int:
+        pass
+
+    if operacao == 1:
+        print("Resultado:", soma(num1, num2))
+    elif operacao == 2:
+        print("Resultado:", subtracao(num1, num2))
+    elif operacao == 3:
+        print("Resultado:", multiplicacao(num1, num2))
+    elif operacao == 4:
+        print("Resultado:", divisao(num1, num2))
+    else:
+        print("Operação inválida.")
+        em_funcionamento(operacao)
     dnv()
-    
+
+
+
 def C_F():
     graus = float(input("Digite a temperatura em Celsius: "))
     Fahrenheit = (graus * 1.8) + 32
@@ -65,14 +87,14 @@ def conversor_temperatura():
     print("1. Celsius para Fahrenheit")
     print("2. Fahrenheit para Celsius")
     print("3. Sair")
-    operacao = input("Escolha a opção: ")
-    if operacao == 1 or operacao == '1':
+    operacao = int(input("Escolha a opção: "))
+    if operacao == 1:
         C_F()
         pedido_conversor()
-    elif operacao == 2 or operacao == '2':
+    elif operacao == 2:
         F_C()
         pedido_conversor()
-    elif operacao == 3 or operacao == '3':
+    elif operacao == 3:
         sair_conversor()
     else:
         print("Opção inválida. Tente novamente.")
@@ -82,27 +104,36 @@ def dnv():
     print("Gostaria de realizar outra operação? (s/n)")
     resposta = input()
     if resposta == 's' or resposta == 'S':
+        print("1. Soma")
+        print("2. Subtração")
+        print("3. Multiplicação")
+        print("4. Divisão")
+        print("5. Sair")
         operacao = int(input("Escolha a operação: "))
-        em_funcionamento(operacao)
+        if operacao not in [5,4,3,2,1]:
+            print("Opção inválida. Tente novamente.")
+            dnv()
+        elif operacao in [5,4,3,2,1]:
+            operacao = int(operacao)
+            em_funcionamento(operacao)
+            # validar_operacao(operacao)
     elif resposta == 'n' or resposta == 'N':
         pedido_conversor()
-        exit()
     else:
         print("Resposta inválida. Tente 's' e 'n'.")
         dnv()
 
-def error():
-    
-    operacao = input("Escolha a operação: ")
-    if operacao == '5':
+def error(operacao):
+
+    if operacao == 5:
         print("Saindo da calculadora.")
         pedido_conversor()
-    elif operacao in ['1', '2', '3', '4']:
-        operacao = int(operacao)
-        em_funcionamento()
-        dnv()
-    else:
-        error()
+    elif operacao in [1, 2, 3, 4]:
+        em_funcionamento(int(operacao))
+    elif operacao not in [1, 2, 3, 4, 5]:
+        print("Opção inválida. Tente novamente.")
+        a = int(input("Escolha a operação: "))
+        error(a)
 
 print("Bem Vindo à Calculadora Simples!!!!")
 
@@ -112,19 +143,5 @@ print("3. Multiplicação")
 print("4. Divisão")
 print("5. Sair")
 
-
-o = int(input("Escolha a operação: "))
-
-
-def operacao(a) -> int:
-
-    if a == 5:
-        print("Saindo da calculadora.")
-        pedido_conversor()
-    elif a in [1, 2, 3, 4]:
-        em_funcionamento(o)
-    else:
-        print("Opção inválida. Tente novamente.")
-        operacao()
-
-operacao(o)
+operacao = int(input("Escolha a operação: "))
+validar_operacao(operacao)
