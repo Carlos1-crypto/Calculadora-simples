@@ -31,7 +31,7 @@ def resposta_validacao(resposta):
     if resposta == 's' or resposta == 'S' or resposta == 'sim' or resposta == 'Sim' or resposta == 'SIM':
         print("Iniciando o conversor de temperatura.")
         conversor_temperatura()
-    elif resposta == 'n' or resposta == 'N' or resposta == 'não' or resposta == 'Não' or resposta == 'NAO' or resposta == 'nao' or resposta == 'NÃO':
+    elif resposta == 'n' or resposta == 'N' or resposta == 'não' or resposta == 'Não' or resposta == 'NAO' or resposta == 'nao' or resposta == 'NÃO' or resposta == 'Nao':
         print("Ok. Até mais!")
         exit()
     else:
@@ -155,3 +155,4 @@ print("5. Sair")
 
 operacao = int(input("Escolha a operação: "))
 validar_operacao(operacao)
+
