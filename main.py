@@ -1,4 +1,4 @@
-# Calcuyladora simples com conversor de temperatura
+# Calculadora simples com conversor de temperatura
 # Autor: Carlos Henrique Silva Prates Viana
 # Data do último commit: 29/09/2025
 # Versão: 1.0.0
@@ -244,3 +244,4 @@ operacao = int(input("Escolha a operação: "))
 validar_operacao(operacao)
 
 # Fim do código.
+
